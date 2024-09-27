@@ -1,6 +1,6 @@
 site_name: Bozio-Wasmer Simulations
-site_url: https://bozio-wasmer-simulations.lab.incubateur.finances.rie.gouv.fr/
-repo_url: https://forge.dgfip.finances.rie.gouv.fr/igf/missions-en-cours/bozio-wasmer
+site_url: https://IGF-PSD.github.io/bozio_wasmer_simulations/
+repo_url: https://github.com/IGF-PSD/bozio_wasmer_simulations
 site_dir: site
 theme:
   name: material
