@@ -39,7 +39,7 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.arithmatex:
-    generic: true
+      generic: true
   - markdown.extensions.sane_lists
   - markdown.extensions.fenced_code:
       lang_prefix: ""
