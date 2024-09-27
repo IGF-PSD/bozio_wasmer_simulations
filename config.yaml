@@ -1,0 +1,83 @@
+CASD :
+  PROJET : "INGENFI"
+
+SIMULATIONS :
+  CORE :
+    YEAR_DATA : 2022
+    YEAR_SIMUL : 2022
+  THEORETICAL :
+    STEP_SMIC : 0.01
+    MAX_SMIC : 4
+    ELASTICITE_TAUX_MARGINAL : 0.5
+    PPV : 100
+
+SCENARIOS :
+  CENTRAL :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.5
+      TAUX_MOINS_DE_50_SALARIES : 0.357
+      TAUX_50_SALARIES_ET_PLUS : 0.361
+  JEUNES :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.45
+      TAUX_MOINS_DE_50_SALARIES : 0.357
+      TAUX_50_SALARIES_ET_PLUS : 0.361
+  SANS_BANDEAUX :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 1.87
+      TAUX_MOINS_DE_50_SALARIES : 0.3975
+      TAUX_50_SALARIES_ET_PLUS : 0.4015
+  BANDEAUX_RECYCLES :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.2
+      TAUX_MOINS_DE_50_SALARIES : 0.3975
+      TAUX_50_SALARIES_ET_PLUS : 0.4015
+  BASCULE_PENTE :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 3.5
+      TAUX_MOINS_DE_50_SALARIES : 0.357
+      TAUX_50_SALARIES_ET_PLUS : 0.361
+  BASCULE_ALLEGEMENT :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 3.5
+      TAUX_MOINS_DE_50_SALARIES : 0.3975
+      TAUX_50_SALARIES_ET_PLUS : 0.4015
+  DSS :
+    TYPE : 'convexe_fillon'
+    PARAMS :
+      PLAFOND : 3
+      TAUX_MOINS_DE_50_SALARIES : 0.357
+      TAUX_50_SALARIES_ET_PLUS : 0.361
+      EXPOSANT : 1.33
+  CENTRAL_4MD :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.35
+      TAUX_MOINS_DE_50_SALARIES : 0.357
+      TAUX_50_SALARIES_ET_PLUS : 0.361
+  PARALLEL_1 :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.4
+      TAUX_MOINS_DE_50_SALARIES : 0.342
+      TAUX_50_SALARIES_ET_PLUS : 0.346
+  PARALLEL_2 :
+    TYPE : 'fillon'
+    PARAMS :
+      PLAFOND : 2.45
+      TAUX_MOINS_DE_50_SALARIES : 0.347
+      TAUX_50_SALARIES_ET_PLUS : 0.351
+
+BASCULE_VM :
+  TAUX : 0.5
+
+DESCRIPTION :
+  SCENARIOS : ['CENTRAL']
+  ELASTICITES : ['dares_0.6-0.2', 'indiv_1.05-0_26', 'indiv_0.6-0', 'indiv_0.5-0', 'indiv_0.4-0', 'indiv_0.3-0', 'indiv_0.2-0', 'firm_0.2']
+  ELASTICITES_DESCRIPTION : ['dares_0.6-0.2', 'indiv_1.05-0_26_firm_0.2', 'indiv_0.6-0_firm_0.2', 'indiv_0.5-0_firm_0.2', 'indiv_0.4-0_firm_0.2', 'indiv_0.3-0_firm_0.2', 'indiv_0.2-0_firm_0.2']

@@ -1,0 +1,22 @@
+{
+    "DADS" : {
+        "COLONNES" : ["ident_s", "siren", "annee", "brut_s", "bascsg", "a17", "a88", "apen", "domempl_empl", "annee_naiss", "comr", "comt", "dept", "pcs", "contrat_travail", "date_debut_contrat", "motifcdd", "datfin", "nat_contrat", "nbheur", "pepa", "eqtp", "filt", "pps"],
+        "COLONNES_2022" : ["ppv_defisc", "ppv_ndefisc"],
+        "COLONNES_CAPTATION_MARGINALE" : ["ident_s", "siren", "annee", "brut_s", "eqtp", "dept", "domempl_empl", "annee_naiss", "date_debut_contrat", "datfin", "nbheur", "pps"]
+    },
+    "CHAMP" : {
+        "DEPT_EXCLUDE" : ["971", "972", "973", "974", "975", "976", "977", "978", "984", "986", "987", "988", "989", "99"],
+        "DOMEMPL_EXCLUDE" : ["1", "2", "3", "4", "5", "7"],
+        "AGE_MIN" : 18,
+        "AGE_MAX" : 64
+    },
+    "PREPROCESSING" : {
+        "KEEP" : ["siren", "ident_s", "eqtp"]
+    }, 
+    "VARIABLES" : ["assiette_cotisations_sociales","chomage_employeur","cotisations_employeur","versement_transport","salaire_super_brut_hors_allegements", "assiette_allegement" ,"exoneration_cotisations_employeur_apprenti", "exoneration_cotisations_employeur_tode", "exoneration_cotisations_employeur_jei", "exoneration_cotisations_employeur_zrd", "exoneration_cotisations_employeur_zrr", "exoneration_cotisations_employeur_stagiaire", "allegement_general", "allegement_cotisation_maladie", "allegement_cotisation_allocations_familiales"],
+    "VARIABLES_PPV" : ["salaire_de_base", "assiette_cotisations_sociales","chomage_employeur","cotisations_employeur","versement_transport","salaire_super_brut_hors_allegements", "assiette_allegement" ,"exoneration_cotisations_employeur_apprenti", "exoneration_cotisations_employeur_tode", "exoneration_cotisations_employeur_jei", "exoneration_cotisations_employeur_zrd", "exoneration_cotisations_employeur_zrr", "exoneration_cotisations_employeur_stagiaire", "allegement_general", "allegement_cotisation_maladie", "allegement_cotisation_allocations_familiales", "salaire_net"],
+    "VARIABLES_CAPTATION_MARGINALE" : ["salaire_de_base", "salaire_net", "prime_partage_valeur_exoneree", "exoneration_cotisations_employeur_tode", "exoneration_cotisations_employeur_apprenti", "exoneration_cotisations_employeur_jei", "exoneration_cotisations_employeur_zrd", "exoneration_cotisations_employeur_zrr", "exoneration_cotisations_employeur_stagiaire", "allegement_general", "allegement_cotisation_maladie", "allegement_cotisation_allocations_familiales", "cotisations_employeur", "chomage_employeur", "assiette_cotisations_sociales", "salaire_super_brut_hors_allegements"],
+    "REFORM" : {
+        "VAR_EXCLUDE" : []
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "USECOLS" : ["siren", "ident_s", "salaire_brut_smic", "age", "salaire_de_base", "remuneration_apprenti", "salaire_super_brut", "quotite_de_travail", "weights"],
+    "DADS" : {
+        "COLONNES" : ["siren", "annee", "apen", "a17", "a38", "pps"]
+    },
+    "FARE" : {
+        "COLONNES" : ["siren", "diff_ul", "categorie_entreprise"]
+    }
+}

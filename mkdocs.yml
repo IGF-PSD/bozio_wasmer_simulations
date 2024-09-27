@@ -1,0 +1,74 @@
+site_name: Bozio-Wasmer Simulations
+site_url: https://bozio-wasmer-simulations.lab.incubateur.finances.rie.gouv.fr/
+repo_url: https://forge.dgfip.finances.rie.gouv.fr/igf/missions-en-cours/bozio-wasmer
+site_dir: site
+theme:
+  name: material
+  features:
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - navigation.sections
+    #- navigation.expand
+    - navigation.path
+  #logo: assets/logo.png
+  palette:
+   # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings
+  #- mkdocs-material
+
+nav:
+  - Package description: index.md
+  - Concepts:
+    - simulation: concepts/SIMULATIONS.md
+    - employment effects: concepts/EMPLOYMENT_EFFECTS.md
+    - measure of incentives to raise wages : concepts/MARGINAL_CAPTATION_RATE.md
+  - API Documentation:
+    - Datasets:
+      - Loader: api/Loader.md
+      - load_dads: api/load_dads.md
+      - load_fare: api/load_fare.md
+    - Description:
+      - DescriptionBuilder: api/DescriptionBuilder.md
+      - build_data_evol_emploi: api/build_data_evol_emploi.md
+      - build_data_evol_ct: api/build_data_evol_ct.md
+    - Simulation:
+      - empirical:
+        - EmpiricalSimulator: api/EmpiricalSimulator.md
+        - CoreSimulation: api/CoreSimulation.md
+        - ReformSimulation: api/ReformSimulation.md
+        - preprocess_dads_openfisca_ag: api/preprocess_dads_openfisca_ag.md
+        - preprocess_simulated_variables: api/preprocess_simulated_variables.md
+        - create_and_apply_structural_reform_ag: api/create_and_apply_structural_reform_ag.md
+        - add_weights_eqtp_accos: api/add_weights_eqtp_accos.md
+      - theoretical: 
+        - TheoreticalSimulator: api/TheoreticalSimulator.md
+        - TheoreticalSimulation: api/TheoreticalSimulation.md
+        - PPVReintegrationSimulator: api/PPVReintegrationSimulator.md
+        - CaptationMarginaleSimulator: api/CaptationMarginaleSimulator.md

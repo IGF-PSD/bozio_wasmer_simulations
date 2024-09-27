@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bozio-wasmer-simulations"
+version = "0.1"
+description = "Simulation de réformes des allègements généraux"
+authors = [{name="Pôle Science des données de l'IGF", email="igf.science-donnees@igf.finances.gouv.fr"}]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    'numpy==1.24.4',
+    'pandas==2.1.4',
+    'pyreadstat==1.2.7',
+    'matplotlib==3.8.2',
+    'seaborn==0.13.1',
+    'openfisca_core==41.4.1',
+    'openfisca_france==166.1.5',
+]
+
+[tool.setuptools.packages.find]
+include = ["bozio_wasmer_simulations"]

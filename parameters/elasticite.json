@@ -1,0 +1,68 @@
+{
+    "ELASTICITES" : {
+        "dares_0.6-0.2" : {
+                "y0_elasticite" : -0.6, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : -0.2, 
+                "type_elasticite" : "indiv",
+                "add_weights" : false,
+                "combine" : false
+            },
+        "indiv_1.05-0_26" : {
+                "y0_elasticite" : -1.05, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : true,
+                "combine" : true
+            },
+        "indiv_0.6-0" : {
+                "y0_elasticite" : -0.6, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : false,
+                "combine" : true
+            },
+        "indiv_0.5-0" : {
+                "y0_elasticite" : -0.5, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : false,
+                "combine" : true
+            },
+        "indiv_0.4-0" : {
+                "y0_elasticite" : -0.4, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : true,
+                "combine" : true
+            },
+        "indiv_0.3-0" : {
+                "y0_elasticite" : -0.3, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : false,
+                "combine" : true
+            },
+        "indiv_0.2-0" : {
+                "y0_elasticite" : -0.2, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : 0, 
+                "type_elasticite" : "indiv",
+                "add_weights" : false,
+                "combine" : true
+            },
+        "firm_0.2" : {
+                "y0_elasticite" : -0.2, 
+                "seuil_pallier_elasticite_smic" : 2, 
+                "pallier_elasticite" : -0.2, 
+                "type_elasticite" : "firm",
+                "add_weights" : false,
+                "combine" : true
+            }
+    }
+}

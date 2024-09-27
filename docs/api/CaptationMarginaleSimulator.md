@@ -1,0 +1,1 @@
+::: bozio_wasmer_simulations.simulation.theoretical.taux_captation_marginal.CaptationMarginaleSimulator
