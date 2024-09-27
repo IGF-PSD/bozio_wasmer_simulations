@@ -27,6 +27,8 @@ theme:
 
 extra_css:
   - assets/stylesheets/extra.css
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -36,12 +38,18 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.arithmatex:
+    generic: true
+  - markdown.extensions.sane_lists
+  - markdown.extensions.fenced_code:
+      lang_prefix: ""
 
 plugins:
   - search
   - autorefs
   - mkdocstrings
   #- mkdocs-material
+  #- typeset
 
 nav:
   - Package description: index.md

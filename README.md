@@ -32,7 +32,7 @@ The repository is organized as follow :
 
 ```bash
 git clone <toolbox_repo_url>
-pip install -e igf_toolbox_python
+pip install -e igf_toolbox
 
 git clone <repo_url>
 pip install -e bozio_wasmer_simulations
@@ -51,6 +51,9 @@ CASD :
 ### Documentation
 
 To visualize the documentation :
+```
+pip install mkdocs mkdocs-material mkdocstrings-python python-markdown-math
+```
 
 ```
 mkdocs build --port 5000
