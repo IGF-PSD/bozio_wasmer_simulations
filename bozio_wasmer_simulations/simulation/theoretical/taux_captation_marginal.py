@@ -101,8 +101,8 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
             None
         """
         # Initialisation du simulateur
-        TheoreticalSimulator.__init__(log_filename=log_filename)
-        CoreSimulation.__init__(project=project, log_filename=log_filename)
+        TheoreticalSimulator.__init__(self, log_filename=log_filename)
+        CoreSimulation.__init__(self, project=project, log_filename=log_filename)
 
 
     # Fonction auxiliaire de calcul du taux de captation marginal
@@ -608,9 +608,7 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         data_simul = pd.concat(
             [
                 data_simul.set_index("salaire_de_base_prop_smic"),
-                data_stat_des.drop(
-                    ["secret_stat_primary", "secret_stat_secondary"], axis=1
-                ),
+                data_stat_des.drop,
             ],
             axis=1,
             join="inner",
