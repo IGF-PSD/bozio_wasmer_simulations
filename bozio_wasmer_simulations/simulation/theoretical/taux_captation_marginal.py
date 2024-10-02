@@ -608,7 +608,7 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         data_simul = pd.concat(
             [
                 data_simul.set_index("salaire_de_base_prop_smic"),
-                data_stat_des.drop,
+                data_stat_des,
             ],
             axis=1,
             join="inner",
@@ -617,7 +617,7 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         # Logging
         self.logger.info("Successfully build simulated DataFrame")
 
-        return data_simul
+        return data_simul, data_secret_stat
 
     # Fonction auxiliaire calculant un taux syntéhtique
     def build_taux_synthetique(
