@@ -23,24 +23,19 @@ def create_and_apply_structural_reform_ag(
     and adds a new variable to calculate. The type of exemption can be 'fillon', 'convexe_fillon', 'allocations_familiales',
     or 'maladie'.
 
-    Args :
-    ------
-        tax_benefit_system : TaxBenefitSystem
+    Args:
+        tax_benefit_system (TaxBenefitSystem):
             The initial tax-benefit system.
-        dict_params : dict
+        dict_params (dict):
             A dictionary containing the parameters of the reform. The 'TYPE' key indicates the type of exemption to add.
-        period : str, optional
+        period (str, optional):
             The period for which the parameters are defined. Default is '2000-01-01'.
 
-    Returns
-    -------
-        TaxBenefitSystem
-            The reformed tax-benefit system.
+    Returns:
+        (TaxBenefitSystem): The reformed tax-benefit system.
 
-    Raises
-    ------
-        ValueError
-            If the type of exemption is not 'fillon', 'convexe_fillon', 'allocations_familiales', or 'maladie'.
+    Raises:
+        ValueError: If the type of exemption is not 'fillon', 'convexe_fillon', 'allocations_familiales', or 'maladie'.
     """
 
     # Distinction suivant le type d'allègement général à ajouter

@@ -41,17 +41,10 @@ class EmpiricalSimulator:
     """
     A class used to simulate empirical data.
 
-    Attributes
-    ----------
-        logger : logging.Logger
+    Attributes:
+        logger (logging.Logger):
             A logger instance.
 
-    Methods
-    -------
-        iterate_simulation(data, tax_benefit_system, year, list_var_simul, list_var_exclude, inplace):
-            Iterates a simulation.
-        simulate_smic_proratise(data, year, list_var_exclude, inplace):
-            Simulates the prorated minimum wage.
     """
 
     # Initialisation
@@ -65,12 +58,9 @@ class EmpiricalSimulator:
         Constructs all the necessary attributes for the EmpiricalSimulator object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/empirical_simulation.log').
 
-        Returns:
-        --------
-            None
+
         """
         # Initialisation du logger
         self.logger = _init_logger(filename=log_filename)
@@ -89,7 +79,6 @@ class EmpiricalSimulator:
         Iterates a simulation.
 
         Args:
-        -----
             data (pd.DataFrame): The data to simulate.
             tax_benefit_system (FranceTaxBenefitSystem): The tax benefit system.
             year (int): The year of the simulation.
@@ -98,8 +87,7 @@ class EmpiricalSimulator:
             inplace (Optional[bool], optional): Whether to perform the simulation in place. Defaults to True.
 
         Returns:
-        --------
-            pd.DataFrame: The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Disjonction de cas suivant la nécessité de réaliser une copie indépendante du jeu de données
         if inplace:
@@ -150,15 +138,13 @@ class EmpiricalSimulator:
         Simulates the prorated minimum wage.
 
         Args:
-        -----
             data (pd.DataFrame): The data to simulate.
             year (int): The year of the simulation.
             list_var_exclude (Optional[List[str]], optional): The list of variables to exclude. Defaults to [].
             inplace (Optional[bool], optional): Whether to perform the simulation in place. Defaults to True.
 
         Returns:
-        --------
-            pd.DataFrame: The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Initialisation des paramètres du système sociofiscal français
         tax_benefit_system = FranceTaxBenefitSystem()
@@ -181,28 +167,6 @@ class CoreSimulation(EmpiricalSimulator):
     """
     A class used to build the core simulation data.
 
-    Methods
-    -------
-        zonage_zrr():
-            Imports the rural revitalization zones (ZRR) zoning.
-        zonage_zrd():
-            Imports the defense restructuring zones (ZRD) zoning.
-        columns_dads(year):
-            Builds the columns for the DADS data.
-        build_data_dads(year, data):
-            Builds the DADS data.
-        _build_data_dads_from_dataframe(data, year):
-            Builds the DADS data from a DataFrame.
-        _init_data_dads(year):
-            Imports and preprocesses the DADS data.
-        preprocess_dads_simulation(year):
-            Preprocesses the DADS data for simulation.
-        add_weights(year_data, year_simul):
-            Adds weights to the DADS data.
-        simulate(year):
-            Simulates the data.
-        build(year_data, year_simul, data):
-            Builds the simulation data.
     """
 
     # Initialisation
@@ -217,11 +181,9 @@ class CoreSimulation(EmpiricalSimulator):
         Constructs all the necessary attributes for the CoreSimulation object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/core_simulation.log').
 
         Returns:
-        --------
             None
         """
         # Initialisation du projet CASD
@@ -236,8 +198,7 @@ class CoreSimulation(EmpiricalSimulator):
         Imports the rural revitalization zones (ZRR) zoning.
 
         Returns:
-        --------
-            List[str]: The list of rural revitalization zones.
+            (List[str]): The list of rural revitalization zones.
         """
         # Importation des données
         data_zonage_zrr = pd.read_excel(
@@ -264,8 +225,7 @@ class CoreSimulation(EmpiricalSimulator):
         Imports the defense restructuring zones (ZRD) zoning.
 
         Returns:
-        --------
-            List[str]: The list of defense restructuring zones.
+            (List[str]): The list of defense restructuring zones.
         """
         # Importation des données
         list_zonage_zrd = pd.read_excel(
@@ -283,12 +243,10 @@ class CoreSimulation(EmpiricalSimulator):
         Builds the columns for the DADS data.
 
         Args:
-        -----
             year (int): The year.
 
         Returns:
-        --------
-            List[str]: The list of columns.
+            (List[str]): The list of columns.
         """
         # Liste des variables à conserver lors de l'import
         columns = params["DADS"]["COLONNES"]
@@ -305,12 +263,10 @@ class CoreSimulation(EmpiricalSimulator):
         Builds the DADS data.
 
         Args:
-        -----
             year (int): The year.
             data (Optional[Union[pd.DataFrame, None]], optional): The data. Defaults to None.
 
         Returns:
-        --------
             None
         """
         if data is not None:
@@ -324,12 +280,10 @@ class CoreSimulation(EmpiricalSimulator):
         Builds the DADS data from a DataFrame.
 
         Args:
-        -----
             data (pd.DataFrame): The data.
             year (int): The year.
 
         Returns:
-        --------
             None
         """
         # Vérification que l'ensemble des variables attendues sont dans le jeu de données
@@ -357,12 +311,10 @@ class CoreSimulation(EmpiricalSimulator):
         Imports and preprocesses the DADS data.
 
         Args:
-        -----
             year (int): The year.
 
         Returns:
-        --------
-            pd.DataFrame: The preprocessed DADS data.
+            (pd.DataFrame): The preprocessed DADS data.
         """
         # Filtre sur les lignes (sélection des postes principaux de l'année du millésime)
         filter_dads = [("annee", "==", f"{year}"), ("pps", "==", "1")]
@@ -400,11 +352,9 @@ class CoreSimulation(EmpiricalSimulator):
         Preprocesses the DADS data for simulation.
 
         Args:
-        -----
             year (int): The year.
 
         Returns:
-        --------
             None
         """
         # Preprocessing pour les allègements généraux
@@ -437,12 +387,10 @@ class CoreSimulation(EmpiricalSimulator):
         Adds weights to the DADS data.
 
         Args:
-        -----
             year_data (int): The year of the data.
             year_simul (int): The year of the simulation.
 
         Returns:
-        --------
             None
         """
         # Simulation du SMIC proratisé
@@ -504,11 +452,9 @@ class CoreSimulation(EmpiricalSimulator):
         Simulates the data.
 
         Args:
-        -----
             year (int): The year.
 
         Returns:
-        --------
             None
         """
         # Le salaire de base  et smic_proratisé sont des variables mensuelles dans Openfisca et les DADS sont des variables annuelles
@@ -554,14 +500,12 @@ class CoreSimulation(EmpiricalSimulator):
         Builds the simulation data.
 
         Args:
-        -----
             year_data (int): The year of the data.
             year_simul (int): The year of the simulation.
             data (Optional[Union[pd.DataFrame, None]], optional): The data. Defaults to None.
 
         Returns:
-        --------
-            pd.DataFrame: The simulation data.
+            (pd.DataFrame): The simulation data.
         """
         # Chargement du jeu de données
         self.build_data_dads(data=data, year=year_data)
@@ -611,28 +555,10 @@ class ReformSimulation(EmpiricalSimulator):
     This class inherits from EmpiricalSimulator and provides methods to build and simulate reform data.
     It includes methods to build simulation data, simulate reforms, and iterate over multiple reform simulations.
 
-    Attributes
-    ----------
-        log_filename : os.PathLike, optional
+    Attributes:
+        log_filename (os.PathLike, optional):
             The path to the log file for the simulation. Default is a path in the logs directory.
 
-    Methods
-    -------
-        build_data_simulation(data, path)
-            Builds the simulation data. If data is provided, it uses _build_data_simulation_from_dataframe.
-            If not, it reads the data from the provided path.
-
-        _build_data_simulation_from_dataframe(data)
-            Builds the simulation data from a DataFrame. Checks if the DataFrame contains all the required variables.
-
-        simulate_reform(name, reform_params, year, taux_bascule_vm)
-            Simulates a reform. Applies the reform to the simulation data and calculates new variables.
-
-        iterate_reform_simulations(scenarios, year, taux_bascule_vm)
-            Iterates over multiple reform simulations. Simulates each reform in the provided scenarios.
-
-        build(scenarios, year, taux_bascule_vm, data, path)
-            Builds the reform simulation data. Calls build_data_simulation and iterate_reform_simulations.
     """
 
     # Initialisation
@@ -646,11 +572,9 @@ class ReformSimulation(EmpiricalSimulator):
         Constructs all the necessary attributes for the ReformSimulation object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/reform_simulation.log').
 
         Returns:
-        --------
             None
         """
         # Initialisation du simulateur
@@ -669,14 +593,12 @@ class ReformSimulation(EmpiricalSimulator):
         If not, it reads the data from the provided path.
 
         Args:
-        -----
-            data : pd.DataFrame, optional
+            data (pd.DataFrame, optional):
                 The data to use for building the simulation data. If None, the data is read from the path.
-            path : os.PathLike, optional
+            path (os.PathLike, optional):
                 The path to the data file. Used if data is None.
 
         Returns:
-        --------
             None
         """
         if data is not None:
@@ -693,13 +615,11 @@ class ReformSimulation(EmpiricalSimulator):
         If it doesn't, it logs an error and raises a ValueError.
 
         Args:
-        -----
-        data : pd.DataFrame
-            The DataFrame to use for building the simulation data.
+            data (pd.DataFrame):
+                The DataFrame to use for building the simulation data.
 
         Returns:
-        --------
-        None
+            None
         """
         # Vérification que l'ensemble des variables attendues sont dans le jeu de données
         # Variables manquantes
@@ -733,19 +653,17 @@ class ReformSimulation(EmpiricalSimulator):
 
         Applies the reform to the simulation data and calculates new variables. The new variables are added to the simulation data.
 
-        Args
-        ----
-            name : str
+        Args:
+            name (str):
                 The name of the reform.
-            reform_params : dict
+            reform_params (dict):
                 The parameters of the reform.
-            year : int
+            year (int):
                 The year for the simulation.
-            taux_bascule_vm : float, optional
+            taux_bascule_vm (float, optional):
                 The rate of the "versement mobilité" (VM) switch. If provided, new variables are calculated for the VM switch.
 
-        Returns
-        -------
+        Returns:
             None
         """
         # Simulation du SMIC proratisé
@@ -837,16 +755,14 @@ class ReformSimulation(EmpiricalSimulator):
         Simulates each reform in the provided scenarios. The results are added to the simulation data.
 
         Args:
-        -----
-            scenarios : dict
+            scenarios (dict):
                 The scenarios to simulate. Each scenario is a dictionary of reform parameters.
-            year : int
+            year (int):
                 The year for the simulation.
-            taux_bascule_vm : float, optional
+            taux_bascule_vm (float, optional):
                 The rate of the value-added tax (VM) switch. If provided, new variables are calculated for the VM switch.
 
         Returns:
-        --------
             None
         """
         # Itération sur les scénarii référencés dans le jeu de données de paramètres
@@ -874,22 +790,19 @@ class ReformSimulation(EmpiricalSimulator):
         Calls build_data_simulation and iterate_reform_simulations to build the simulation data.
 
         Args:
-        -----
-            scenarios : dict
+            scenarios (dict):
                 The scenarios to simulate. Each scenario is a dictionary of reform parameters.
-            year : int
+            year (int):
                 The year for the simulation.
-            taux_bascule_vm : float, optional
+            taux_bascule_vm (float, optional):
                 The rate of the value-added tax (VM) switch. If provided, new variables are calculated for the VM switch.
-            data : pd.DataFrame, optional
+            data (pd.DataFrame, optional):
                 The data to use for building the simulation data. If None, the data is read from the path.
-            path : os.PathLike, optional
+            path (os.PathLike, optional):
                 The path to the data file. Used if data is None.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulation data.
+            (pd.DataFrame): The simulation data.
         """
         # Ajout du jeu de données de simulations
         self.build_data_simulation(data=data, path=path)

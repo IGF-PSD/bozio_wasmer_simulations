@@ -21,7 +21,6 @@ def build_data_evol_emploi(
     Creates variables of interest concerning the employment effects of reforms.
 
     Args:
-    ----------
         data_source (pd.DataFrame): The source data.
         col_new_ct (str): The column of the new cost of labor.
         col_evol (str): The column of the evolution.
@@ -34,8 +33,7 @@ def build_data_evol_emploi(
         col_ct (str, optional): The column of the cost of labor. Defaults to 'salaire_super_brut'.
 
     Returns:
-    ----------
-        pd.DataFrame: The data with the employment effects variables.
+        (pd.DataFrame): The data with the employment effects variables.
     """
     # Copie indépendante du jeu de données
     data_emploi = data_source[
@@ -121,15 +119,13 @@ def build_data_evol_ct(
     Creates variables of interest concerning the evolution of the cost of labor.
 
     Args:
-    ----------
         data_source (pd.DataFrame): The source data.
         col_new_ct (str): The column of the new cost of labor.
         to_concat (bool): Whether to concatenate the result to the source data.
         col_ct (str, optional): The column of the cost of labor. Defaults to 'salaire_super_brut'.
 
     Returns:
-    ----------
-        pd.DataFrame: The data with the cost of labor evolution variables.
+        (pd.DataFrame): The data with the cost of labor evolution variables.
     """
     # Copie indépendante des grandeurs d'intérêt du jeu de données
     data_evol_ct = data_source[["siren", "weights", col_new_ct, col_ct]].copy()

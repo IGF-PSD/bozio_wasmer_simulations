@@ -43,24 +43,10 @@ class TheoreticalSimulator:
 
     This class provides methods for initializing a base case, simulating the base case, and plotting the results.
 
-    Attributes
-    ----------
-        logger : logging.Logger
+    Attributes:
+        logger (logging.Logger):
             A logger for logging messages.
 
-    Methods
-    -------
-        value_smic(year)
-            Calculates the value of the SMIC for the given year.
-
-        init_base_case(year, simulation_step_smic, simulation_max_smic)
-            Initializes a base case for simulation.
-
-        base_case_simulation(tax_benefit_system, year, list_var_simul)
-            Performs a simulation on the base case.
-
-        plot(data, x, hue, x_label=None, y_label=None, hue_label=None, labels={}, export_key=None, show=True)
-            Plots the results of the simulation.
     """
 
     # Initialisation
@@ -74,12 +60,8 @@ class TheoreticalSimulator:
         Constructs all the necessary attributes for the EmpiricalSimulator object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/empirical_simulation.log').
 
-        Returns:
-        --------
-            None
         """
         # Initialisation du logger
         self.logger = _init_logger(filename=log_filename)
@@ -90,14 +72,11 @@ class TheoreticalSimulator:
         Calculates the value of the SMIC for the given year.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the SMIC value is calculated.
 
         Returns:
-        --------
-            float
-                The value of the SMIC for the given year.
+            (float): The value of the SMIC for the given year.
         """
         # Initialisation du système socio-fiscal contenant les valeurs de SMIC en paramètres
         tax_benefit_system = FranceTaxBenefitSystem()
@@ -122,12 +101,11 @@ class TheoreticalSimulator:
         Initializes a base case for simulation.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
         """
         # Initialisation du système socio-fiscal contenant les valeurs de SMIC en paramètres
@@ -208,23 +186,20 @@ class TheoreticalSimulator:
     # Fonction auxilaire d'itération d'une simulation sur un cas
     def base_case_simulation(
         self, tax_benefit_system: TaxBenefitSystem, year: int, list_var_simul: List[str]
-    ):
+    ) -> pd.DataFrame:
         """
         Performs a simulation on the base case.
 
         Args:
-        -----
-            tax_benefit_system : TaxBenefitSystem
+            tax_benefit_system (TaxBenefitSystem):
                 The tax-benefit system to use for the simulation.
-            year : int
+            year (int):
                 The year for which the simulation is performed.
-            list_var_simul : List[str]
+            list_var_simul (List[str]):
                 A list of variables to simulate.
 
-        Returns
-        -------
-            pd.DataFrame
-                A dataframe containing the results of the simulation.
+        Returns:
+            (pd.DataFrame): A dataframe containing the results of the simulation.
         """
         # Initialisation des paramètres de la simulation
         simulation_builder = SimulationBuilder()
@@ -255,33 +230,31 @@ class TheoreticalSimulator:
         labels: Optional[Dict[str, str]] = {},
         export_key: Optional[Union[os.PathLike, None]] = None,
         show: Optional[bool] = True,
-    ):
+    ) -> None:
         """
         Plots the results of the simulation.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The data to plot.
-            x : str
+            x (str):
                 The variable to use for the x-axis.
-            hue : Union[str, List[str]]
+            hue (Union[str, List[str]]):
                 The variable(s) to use for the hue.
-            x_label : Optional[Union[str, None]], optional
+            x_label (Optional[Union[str, None]], optional):
                 The label for the x-axis. Defaults to None.
-            y_label : Optional[Union[str, None]], optional
+            y_label (Optional[Union[str, None]], optional):
                 The label for the y-axis. Defaults to None.
-            hue_label : Optional[Union[str, None]], optional
+            hue_label (Optional[Union[str, None]], optional):
                 The label for the hue. Defaults to None.
-            labels : Optional[Dict[str, str]], optional
+            labels (Optional[Dict[str, str]], optional):
                 A dictionary of labels to apply to the data. Defaults to {}.
-            export_key : Optional[Union[os.PathLike, None]], optional
+            export_key (Optional[Union[os.PathLike, None]], optional):
                 The path to save the plot to. Defaults to None.
-            show : Optional[bool], optional
+            show (Optional[bool], optional):
                 Whether to display the plot. Defaults to True.
 
         Returns:
-        --------
             None
         """
         # Conversion des arguments en liste
@@ -333,24 +306,10 @@ class TheoreticalSimulation(TheoreticalSimulator):
     This class inherits from TheoreticalSimulator and provides methods for simulating variables of interest,
     simulating a reform, and simulating multiple reforms.
 
-    Attributes
-    ----------
-        logger : logging.Logger
+    Attributes:
+        logger (logging.Logger):
             A logger for logging messages.
 
-    Methods
-    -------
-        _preprocess_assiette_allegement(data, year, list_var)
-            Preprocesses the allegement base.
-
-        core_simulation(year, simulation_step_smic, simulation_max_smic)
-            Simulates the variables of interest.
-
-        simulate_reform(name, reform_params, year, simulation_step_smic, simulation_max_smic)
-            Simulates a reform.
-
-        iterate_reform_simulations(scenarios, year, simulation_step_smic, simulation_max_smic)
-            Simulates multiple reforms.
     """
 
     # Initialisation
@@ -364,12 +323,8 @@ class TheoreticalSimulation(TheoreticalSimulator):
         Constructs all the necessary attributes for the ReformSimulation object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/theoretical_simulation.log').
 
-        Returns:
-        --------
-            None
         """
         # Initialisation du simulateur
         super().__init__(log_filename=log_filename)
@@ -385,18 +340,15 @@ class TheoreticalSimulation(TheoreticalSimulator):
         Expresses the allegement base as a proportion of the SMIC.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            year : int
+            year (int):
                 The year for which the data is being processed.
-            list_var : List[str]
+            list_var (List[str]):
                 A list of variables to process.
 
         Returns:
-        --------
-            pd.DataFrame
-                The preprocessed data.
+            (pd.DataFrame): The preprocessed data.
         """
         # Expression de l'ensemble des grandeurs en proportion de l'assiette d'allègements
         list_var_prop = np.setdiff1d(list_var, ["assiette_allegement"]).tolist()
@@ -425,18 +377,15 @@ class TheoreticalSimulation(TheoreticalSimulator):
         and preprocesses the allegement base.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Initialisation du cas de simulation
         self.init_base_case(
@@ -486,22 +435,19 @@ class TheoreticalSimulation(TheoreticalSimulator):
         applies the reform, simulates the variables, and preprocesses the allegement base.
 
         Args:
-        -----
-            name : str
+            name (str):
                 The name of the reform.
-            reform_params : dict
+            reform_params (dict):
                 The parameters of the reform.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Initialisation du cas de simulation
         if not hasattr(self, "base_case"):
@@ -563,20 +509,17 @@ class TheoreticalSimulation(TheoreticalSimulator):
         Concatenates the simulated data for all reforms.
 
         Args:
-        -----
-            scenarios : dict
+            scenarios (dict):
                 The scenarios to simulate.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data for all reforms.
+            (pd.DataFrame): The simulated data for all reforms.
         """
         # Initialisation de la liste résultat
         list_data_simul = []

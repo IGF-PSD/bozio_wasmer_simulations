@@ -12,16 +12,14 @@ def _recursive_dict_update(dict_source: dict, dict_update: dict) -> dict:
     Recursively updates a dictionary with values from another dictionary.
 
     Args:
-    -----
-        dict_source : dict
+        dict_source (dict):
             The source dictionary.
-        dict_update : dict
+        dict_update (dict):
             The dictionary containing the updates.
 
     Returns:
     --------
-        dict
-            The updated dictionary.
+        dict: The updated dictionary.
     """
     # Initialisation du dictionnaire résultat
     dict_result = deepcopy(dict_source)
@@ -48,14 +46,11 @@ def _init_logger(filename: os.PathLike) -> logging.Logger:
     Creates the directory for the log file if it does not exist.
 
     Args:
-    -----
-        filename : os.PathLike
+        filename (os.PathLike):
             The path to the log file.
 
     Returns:
-    --------
-        logging.Logger
-            The initialized logger.
+        logging.Logger: The initialized logger.
     """
     # Configuration du logging
     logging.basicConfig(

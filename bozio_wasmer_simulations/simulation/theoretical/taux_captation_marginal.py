@@ -43,41 +43,8 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
     building the dataset, and calculating a synthetic rate.
 
     Attributes:
-    -----------
-        logger : logging.Logger
+        logger (logging.Logger):
             A logger for logging messages.
-
-    Methods:
-    --------
-        _calculate_taux_captation_marginal(data, name)
-            Calculates the marginal capture rate.
-
-        _preprocess_salaire_de_base(data, year, name)
-            Preprocesses the gross salary.
-
-        columns_dads(year)
-            Returns the columns to keep from the DADS data.
-
-        preprocess_dads_simulation(year)
-            Preprocesses the DADS data for simulation.
-
-        simulate(year, simulation_step_smic, simulation_max_smic)
-            Simulates the marginal capture rate.
-
-        simulate_reform(name, reform_params, year, simulation_step_smic, simulation_max_smic)
-            Simulates a reform.
-
-        iterate_reform_simulations(scenarios, year, simulation_step_smic, simulation_max_smic)
-            Simulates multiple reforms.
-
-        build_weights_simulation(data_simul, year, simulation_max_smic, list_var_groupby)
-            Builds the weights for the simulation.
-
-        build(year_data, year_simul, simulation_step_smic, simulation_max_smic, scenarios, data)
-            Builds the dataset.
-
-        build_taux_synthetique(data, elasticite, names, weights)
-            Calculates a synthetic rate.
     """
 
     # Initialisation
@@ -92,13 +59,9 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Constructs all the necessary attributes for the ReformSimulation object.
 
         Args:
-        -----
             project (str): The name of the CASD project
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/captation_marginale_simulation.log').
 
-        Returns:
-        --------
-            None
         """
         # Initialisation du simulateur
         TheoreticalSimulator.__init__(self, log_filename=log_filename)
@@ -113,16 +76,13 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Calculates the marginal capture rate.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            name : Union[str, None]
+            name (Union[str, None]):
                 The name of the scenario.
 
         Returns:
-        --------
-            pd.DataFrame
-                The input data with the marginal capture rate calculated.
+            (pd.DataFrame): The input data with the marginal capture rate calculated.
         """
         # Calcul des \delta S_NET / \delta Coût du travail
         if (name is None) | (name == ""):
@@ -155,18 +115,15 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Expresses the gross salary as a proportion of the SMIC and drops the unnecessary columns.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            year : int
+            year (int):
                 The year for which the data is being processed.
-            name : str
+            name (str):
                 The name of the scenario.
 
         Returns:
-        --------
-            pd.DataFrame
-                The preprocessed data.
+            (pd.DataFrame): The preprocessed data.
         """
         # Expression du salaire en proportion du SMIC
         data["salaire_de_base_prop_smic"] = data["salaire_de_base"] / self.value_smic(
@@ -195,14 +152,11 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Returns the columns to keep from the DADS data.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the data is being processed.
 
         Returns:
-        --------
-            List[str]
-                The columns to keep from the DADS data.
+            (List[str]): The columns to keep from the DADS data.
         """
         # Liste des variables à conserver lors de l'import
         return params["DADS"]["COLONNES_CAPTATION_MARGINALE"]
@@ -213,8 +167,7 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Preprocesses the DADS data for simulation.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the data is being processed.
         """
         # Simulation du SMIC proratisé
@@ -279,18 +232,15 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         calculates the marginal capture rate, and preprocesses the gross salary.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Initialisation du cas de simulation
         self.init_base_case(
@@ -327,7 +277,7 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         year: int,
         simulation_step_smic: float,
         simulation_max_smic: float,
-    ):
+    ) -> pd.DataFrame:
         """
         Simulates a reform.
 
@@ -336,22 +286,19 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         calculates the marginal capture rate, and preprocesses the gross salary.
 
         Args:
-        -----
-            name : str
+            name (str):
                 The name of the reform.
-            reform_params : dict
+            reform_params (dict):
                 The parameters of the reform.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
         """
         # Initialisation du cas de simulation
         if not hasattr(self, "base_case"):
@@ -424,20 +371,17 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Concatenates the simulated data for all reforms.
 
         Args:
-        -----
-            scenarios : dict
+            scenarios (dict):
                 The scenarios to simulate.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data for all reforms.
+            (pd.DataFrame): The simulated data for all reforms.
         """
         # Initialisation de la liste résultat
         list_data_simul = []
@@ -472,25 +416,22 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         year: int,
         simulation_max_smic: float,
         list_var_groupby: Optional[List[str]] = ["salaire_de_base_prop_smic"],
-    ):
+    ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
         Builds the weights for the simulation.
 
         Args:
-        -----
-            data_simul : pd.DataFrame
+            data_simul (pd.DataFrame):
                 The simulated data.
-            year : int
+            year (int):
                 The year for which the data is being processed.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            list_var_groupby : Optional[List[str]], optional
+            list_var_groupby (Optional[List[str]], optional):
                 The variables to group by, by default ['salaire_de_base_prop_smic']
 
         Returns:
-        --------
-            Tuple[pd.DataFrame, pd.DataFrame]
-                The descriptive statistics and the secret statistics.
+            (Tuple[pd.DataFrame, pd.DataFrame]): The descriptive statistics and the secret statistics.
         """
         # Construction du jeu de données data_dads s'il n'est pas déjà en argument
         if not hasattr(self, "data_dads"):
@@ -552,24 +493,21 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         simulates the reforms, builds the weights, and returns the dataset.
 
         Args:
-        -----
-            year_data : int
+            year_data (int):
                 The year of the data.
-            year_simul : int
+            year_simul (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            scenarios : Optional[Union[dict, None]], optional
+            scenarios (Optional[Union[dict, None]], optional):
                 The scenarios to simulate, by default None
-            data : Optional[Union[pd.DataFrame, None]], optional
+            data (Optional[Union[pd.DataFrame, None]], optional):
                 The data, by default None
 
-        Returns
-        -------
-            pd.DataFrame
-                The dataset.
+        Returns:
+            (pd.DataFrame): The dataset.
         """
         # Chargement du jeu de données
         self.build_data_dads(data=data, year=year_data)
@@ -631,25 +569,20 @@ class CaptationMarginaleSimulator(TheoreticalSimulator, CoreSimulation):
         Calculates a synthetic rate.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            elasticite : int
+            elasticite (int):
                 The elasticity.
-            names : List[str]
+            names (List[str]):
                 The names of the scenarios.
-            weights : Optional[List[str]], optional
+            weights (Optional[List[str]], optional):
                 The weights, by default ['eqtp_sum', 'salaire_de_base_sum']
 
         Returns:
-        --------
-            pd.DataFrame
-                The synthetic rate.
+            (pd.DataFrame): The synthetic rate.
 
         Raises:
-        -------
-            ValueError
-                If the input data does not contain the necessary columns.
+            ValueError: If the input data does not contain the necessary columns.
         """
         # Vérification que les les colonnes nécessaires sont bien présentes dans le jeu de données
         missing_columns = np.setdiff1d(

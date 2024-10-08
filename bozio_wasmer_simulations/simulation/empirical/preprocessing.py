@@ -19,25 +19,22 @@ def preprocess_dads_openfisca_ag(
     year: int,
     list_zonage_zrr: List[str],
     list_zonage_zrd: List[str],
-):
+) -> pd.DataFrame:
     """
     Preprocesses the data to make it compatible with Openfisca for simulating general exemptions.
 
     Args:
-    -----
-        data_dads : pd.DataFrame
+        data_dads (pd.DataFrame):
             The input data.
-        year : int
+        year (int):
             The year for which the data is being processed.
-        list_zonage_zrr : List[str]
+        list_zonage_zrr (List[str]):
             A list of codes for rural revitalization zones.
-        list_zonage_zrd : List[str]
+        list_zonage_zrd (List[str]):
             A list of codes for defense restructuring zones.
 
     Returns:
-    --------
-        pd.DataFrame
-            The preprocessed data.
+        (pd.DataFrame): The preprocessed data.
     """
     # Construction de colonnes d'intérêt
 
@@ -190,7 +187,7 @@ def preprocess_dads_openfisca_ag(
 
 
 # Fonction de post-processing des variables simulées
-def preprocess_simulated_variables(data: pd.DataFrame):
+def preprocess_simulated_variables(data: pd.DataFrame) -> pd.DataFrame:
     """
     Post-processes the simulated variables.
 
@@ -198,14 +195,11 @@ def preprocess_simulated_variables(data: pd.DataFrame):
     Corrects the unemployment benefits and calculates the gross salary.
 
     Args:
-    -----
-        data : pd.DataFrame
+        data (pd.DataFrame):
             The input data with simulated variables.
 
     Returns:
-    --------
-        pd.DataFrame
-            The post-processed data.
+        (pd.DataFrame): The post-processed data.
     """
     # Somme des exonérations
     data["exonerations"] = (

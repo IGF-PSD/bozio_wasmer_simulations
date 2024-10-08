@@ -2,13 +2,30 @@
 [data-md-color-scheme="slate"] {
     --md-primary-fg-color:        #096C45;
     --md-primary-fg-color--dark:  #096C45;
-    --md-accent-fg-color:#B86300;
-    --md-accent-bg-color:#B86300;
+    --md-accent-fg-color:#074e32;
+    --md-accent-bg-color:#074e32;
 }
 
 [data-md-color-scheme="default"] {
     --md-primary-fg-color: #096C45;
     --md-primary-fg-color--light: #096C45;
-    --md-accent-fg-color:#B86300;
+    --md-accent-fg-color:#074e32;
 }
 
+/* Main content area link color */
+.md-typeset a {
+    color: #096C45;  /* Change to your desired content link color */
+  }
+  
+  /* Main content area link hover color */
+  .md-typeset a:hover {
+    color: #074e32;  /* Change to your desired hover color */
+  }
+
+  /* Active sidebar link color */
+.md-nav__link--active {
+    color: #096C45 !important;  /* Active sidebar link color */
+    }
+.md-nav__link--active:hover {
+    color: #074e32 !important;
+}

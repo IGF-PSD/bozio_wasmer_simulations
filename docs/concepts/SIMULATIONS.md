@@ -10,6 +10,7 @@ Simulations are iterated on the "Base Tous Salariés, Postes" of the  Déclarati
 
 We use version 166.1.5 of the [`openfisca-france`](https://github.com/openfisca/openfisca-france) package to simulate all the employers contributions and payroll tax reductions applicable to each employee. These simulations make it possible to deduce a labor cost associated with each individual. 
 A reform module is then used to simulate a set of alternative payroll tax reductions and deduce a new labor cost. These new reductions can take the form of :
+
 - a "Fillon" payroll tax reduction with parameters $\left( rate_{max}, ceiling \right)$ : \(rate = \frac{rate_{max}}{ceiling -1} \times \left( ceiling \times \frac{Gross \;Minimum \; Wage}{Gross \; Salary} -1 \right)\)
 - a "Convexe Fillon" payroll tax reduction with parameters $\left( rate_{max}, ceiling, exponent \right)$ : \(rate = rate_{max} \times \left[ \frac{ceiling \times \frac{Gross \;Minimum \; Wage}{Gross \; Salary} -1}{ceiling -1}  \right]^{exponent}\)
 - a "Family" or "Illness" payroll tax reduction with parameters $\left( rate_{max}, ceiling \right)$: \(rate = \mathbb{1}_{Gross \; Salary \leq ceiling} \times rate_{max}\)

@@ -17,7 +17,7 @@ def add_weights_eqtp_accos(
     var_eqtp: str,
     var_sal_brut: str,
     var_smic_proratise: str = "smic_proratise",
-):
+) -> pd.DataFrame:
     """
     Adds weights to the data based on ACOSS data.
 
@@ -27,22 +27,19 @@ def add_weights_eqtp_accos(
     The function returns the data with the weights added.
 
     Args:
-    -----
-        data_dads : pd.DataFrame
+        data_dads (pd.DataFrame):
             The input data.
-        year : int
+        year (int):
             The year for which the weights are calculated.
-        var_eqtp : str
+        var_eqtp (str):
             The name of the variable containing the employment data.
-        var_sal_brut : str
+        var_sal_brut (str):
             The name of the variable containing the gross salary data.
-        var_smic_proratise : str, optional
+        var_smic_proratise (str, optional):
             The name of the variable containing the prorated SMIC data. Default is 'smic_proratise'.
 
-    Returns
-    -------
-        pd.DataFrame
-            The input data with the weights added.
+    Returns:
+        (pd.DataFrame): The input data with the weights added.
     """
     # Salaire en proportion du SMIC
     if "salaire_brut_smic" not in data_dads.columns:

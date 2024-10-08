@@ -5,12 +5,14 @@ This directory contains all the programs used to simulate the reforms presented 
 ## Objectives
 
 This package is built to quantify different outcomes of employer contributions :
-* Empirically :
-  - To quantify budget costs (static and "first-round" after application of the employment effects) associated with each reform
-  - To estimate employment effects of the reform
-* Theorically :
-  - To estimate incentives to increase wages
-  - To estimate the impact of adding the "prime de partage de la valeur" to the basis for reducing contributions
+
+- Empirically :
+    - To quantify budget costs (static and "first-round" after application of the employment effects) associated with each reform
+    - To estimate employment effects of the reform
+
+- Theoretically :
+    - To estimate incentives to increase wages
+    - To estimate the impact of adding the "prime de partage de la valeur" to the basis for reducing contributions
 
 
 ## Installation
@@ -35,14 +37,6 @@ CASD :
   PROJET : "INGENFI"
 ``` 
 
-### Documentation
-
-To visualize the documentation :
-
-```
-mkdocs build --port 5000
-```
-
 ## Usage
 
 Here's an example of how to use the functions in the package:
@@ -64,7 +58,13 @@ reform_params = {
 }
 
 # Simulate a reform
-data_simul = simulator.simulate_reform(name='my_reform', reform_params=reform_params, year=2022, simulation_step_smic=0.1, simulation_max_smic=4)
+data_simul = simulator.simulate_reform(
+  name='my_reform', 
+  reform_params=reform_params, 
+  year=2022, 
+  simulation_step_smic=0.1, 
+  simulation_max_smic=4
+)
 ``` 
 
 ## License

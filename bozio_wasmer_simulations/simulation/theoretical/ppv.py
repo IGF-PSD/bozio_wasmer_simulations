@@ -37,42 +37,10 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
     simulating variables of interest, simulating a reform, simulating multiple reforms, calculating the implicit tax rate,
     and building the dataset.
 
-    Attributes
-    ----------
-        logger : logging.Logger
+    Attributes:
+        logger (logging.Logger):
             A logger for logging messages.
 
-    Methods
-    -------
-        scenarios_names(scenarios)
-            Extracts the names of the scenarios.
-
-        init_case_ppv_exoneree(year, simulation_step_smic, simulation_max_smic, ppv)
-            Initializes a case with the PPV exempted.
-
-        init_case_ppv_reintegree(year, simulation_step_smic, simulation_max_smic, ppv)
-            Initializes a case with the PPV reintegrated.
-
-        _preprocess_salaire_de_base(data, year)
-            Preprocesses the gross salary.
-
-        _preprocess_salaire_super_brut(data, scenarios, simulation_case)
-            Preprocesses the gross salary.
-
-        core_simulation(year, simulation_step_smic, simulation_max_smic, simulation_case, ppv)
-            Simulates the variables of interest.
-
-        simulate_reform(name, reform_params, year, simulation_step_smic, simulation_max_smic, simulation_case, ppv)
-            Simulates a reform.
-
-        iterate_reform_simulations(scenarios, year, simulation_step_smic, simulation_max_smic, simulation_case, ppv)
-            Simulates multiple reforms.
-
-        calculate_taux_cotisation_implicite(data, scenarios, simulation_case)
-            Calculates the implicit tax rate.
-
-        build(scenarios, year, simulation_step_smic, simulation_max_smic, simulation_case, ppv)
-            Builds the dataset.
     """
 
     # Initialisation
@@ -86,12 +54,8 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Constructs all the necessary attributes for the ReformSimulation object.
 
         Args:
-        -----
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[3], 'logs/ppv_simulation.log').
 
-        Returns:
-        --------
-            None
         """
         # Initialisation du simulateur
         super().__init__(log_filename=log_filename)
@@ -102,19 +66,14 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Extracts the names of the scenarios.
 
         Args:
-        -----
-            scenarios : Union[str, List[str], dict]
+            scenarios (Union[str, List[str], dict]):
                 The scenarios to extract the names from.
 
         Returns:
-        --------
-            List[str]
-                The names of the scenarios.
+            (List[str]): The names of the scenarios.
 
         Raises:
-        -------
-            ValueError
-                If the type of scenarios is not 'dict', 'list', or 'str'.
+            ValueError: If the type of scenarios is not 'dict', 'list', or 'str'.
         """
         # Extraction des noms des scenarios
         if isinstance(scenarios, str):
@@ -142,18 +101,16 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Initializes a case with the PPV exempted.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
 
         Returns:
-        --------
             None
         """
         # Initialisation du cas de base
@@ -188,14 +145,13 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Initializes a case with the PPV reintegrated.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
         """
         # Initialisation du cas de base
@@ -222,16 +178,13 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Expresses the gross salary as a proportion of the SMIC.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            year : int
+            year (int):
                 The year for which the data is being processed.
 
         Returns:
-        --------
-            pd.DataFrame
-                The preprocessed data.
+            (pd.DataFrame): The preprocessed data.
         """
         # Expression du salaire en proportion du SMIC
         data["salaire_de_base_prop_smic"] = data["salaire_de_base"] / self.value_smic(
@@ -253,18 +206,15 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Calculates the gross salary for each scenario and drops the unnecessary columns.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            scenarios : Union[str, List[str], dict]
+            scenarios (Union[str, List[str], dict]):
                 The scenarios to simulate.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
 
         Returns:
-        --------
-            pd.DataFrame
-                The preprocessed data.
+            (pd.DataFrame): The preprocessed data.
         """
         # Parcours des scénarios
         for scenario in self.scenarios_names(scenarios=scenarios):
@@ -300,27 +250,22 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         and preprocesses the gross salary.
 
         Args:
-        -----
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
 
         Raises:
-        -------
-            ValueError
-                If the simulation case is not 'exoneree' or 'reintegree'.
+            ValueError: If the simulation case is not 'exoneree' or 'reintegree'.
         """
         # Initialisation du cas de simulation
         if simulation_case == "exoneree":
@@ -393,31 +338,26 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         applies the reform, simulates the variables, and preprocesses the gross salary.
 
         Args:
-        -----
-            name : str
+            name (str):
                 The name of the reform.
-            reform_params : dict
+            reform_params (dict):
                 The parameters of the reform.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data.
+            (pd.DataFrame): The simulated data.
 
         Raises:
-        -------
-            ValueError
-                If the simulation case is not 'exoneree' or 'reintegree'.
+            ValueError: If the simulation case is not 'exoneree' or 'reintegree'.
         """
         # Initialisation du cas de simulation
         if simulation_case == "exoneree":
@@ -489,24 +429,21 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Concatenates the simulated data for all reforms.
 
         Args:
-        -----
-            scenarios : Union[str, List[str], dict]
+            scenarios (Union[str, List[str], dict]):
                 The scenarios to simulate.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
 
         Returns:
-        --------
-            pd.DataFrame
-                The simulated data for all reforms.
+            (pd.DataFrame): The simulated data for all reforms.
         """
         # Initialisation de la liste résultat
         list_data_simul = []
@@ -553,18 +490,15 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         Calculates the implicit tax rate for each scenario and drops the unnecessary columns.
 
         Args:
-        -----
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The input data.
-            scenarios : Union[str, List[str], dict]
+            scenarios (Union[str, List[str], dict]):
                 The scenarios to simulate.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
 
         Returns:
-        --------
-            pd.DataFrame
-                The data with the implicit tax rate calculated.
+            (pd.DataFrame): The data with the implicit tax rate calculated.
         """
         # Parcours des scénarios
         for scenario in self.scenarios_names(scenarios=scenarios):
@@ -589,7 +523,7 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         simulation_max_smic: float,
         simulation_case: str,
         ppv: float,
-    ):
+    ) -> pd.DataFrame:
         """
         Builds the dataset.
 
@@ -597,24 +531,21 @@ class PPVReintegrationSimulator(TheoreticalSimulator):
         calculates the implicit tax rate, and returns the dataset.
 
         Args:
-        -----
-            scenarios : dict
+            scenarios (dict):
                 The scenarios to simulate.
-            year : int
+            year (int):
                 The year for which the simulation is being performed.
-            simulation_step_smic : float
+            simulation_step_smic (float):
                 The step size for the simulation, as a multiple of the SMIC value.
-            simulation_max_smic : float
+            simulation_max_smic (float):
                 The maximum value for the simulation, as a multiple of the SMIC value.
-            simulation_case : str
+            simulation_case (str):
                 The simulation case ('exoneree' or 'reintegree').
-            ppv : float
+            ppv (float):
                 The amount of the PPV.
 
         Returns:
-        --------
-            pd.DataFrame
-                The dataset.
+            (pd.DataFrame): The dataset.
         """
         # Construction du scénario de base et concaténration des simulations des scénarios de réforme
         data_simul = pd.concat(

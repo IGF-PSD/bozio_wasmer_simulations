@@ -1,6 +1,7 @@
 # Simulations of reforms to employer contributions from the "Bozio-Wasmer" report
 
 This directory contains all the programs used to simulate the reforms presented in the "Bozio-Wasmer" report and their outcomes.
+> Full documentation is available [here](https://igf-psd.github.io/bozio_wasmer_simulations/)
 
 ## Objectives
 

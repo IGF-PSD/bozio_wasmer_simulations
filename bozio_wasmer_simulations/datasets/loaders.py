@@ -18,18 +18,15 @@ def load_dads(
     Loads the DADS data for a given year.
 
     Args:
-    ----------
-        project (str) : The name of the CASD project
+        project (str): The name of the CASD project
         year (int): The year of the data to load.
         columns (List[str]): The columns to load.
         filters (Optional[List[Tuple[str, str, str]]], optional): The filters to apply. Each filter is a tuple of (column, operator, value). Defaults to None.
 
     Returns:
-    ----------
-        pd.DataFrame: The loaded data.
+        (pd.DataFrame): The loaded data.
 
     Raises:
-    ----------
         ValueError: If the data is not available for the given year.
     """
     # Initialisation du loader
@@ -121,15 +118,13 @@ def load_fare(
     Loads the FARE data for a given year.
 
     Args:
-    ----------
         project (str) : The name of the CASD project
         year (int): The year of the data to load.
         columns (List[str]): The columns to load.
         filters (Optional[List[Tuple[str, str, str]]], optional): The filters to apply. Each filter is a tuple of (column, operator, value). Defaults to None.
 
     Returns:
-    ----------
-        pd.DataFrame: The loaded data.
+        (pd.DataFrame): The loaded data.
     """
     # Distinction du chemin selon l'année
     # Les données postérieures à 2021 n'étant pas disponibles, ce millésime est retenu en dernier ressort

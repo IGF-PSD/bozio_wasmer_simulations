@@ -38,45 +38,12 @@ class DescriptionBuilder:
     A class used to build a dataset for description and calculate employment effects.
 
 
-    Attributes;
-    ----------
-        logger : logging.Logger
+    Attributes:
+        logger (logging.Logger):
             A logger instance.
-        project : str
+        project (str):
             The name of the CASD project
 
-    Methods:
-    -------
-        scenarios_names(scenarios):
-            Extracts the names of scenarios.
-        build_data_simulation(year, scenarios, taux_bascule_vm):
-            Builds the simulation data.
-        _build_data_simulation_from_dataframe(year, scenarios):
-            Builds the simulation data from a DataFrame.
-        _init_data_simulation(year, scenarios, taux_bascule_vm):
-            Initializes the simulation data.
-        add_labor_costs_variables(scenarios):
-            Adds labor costs variables to the simulation data.
-        add_employment_effect(scenarios, name_elasticite, y0_elasticite, seuil_pallier_elasticite_smic, pallier_elasticite, type_elasticite):
-            Adds employment effect to the simulation data.
-        add_employment_effects(scenarios, elasticites_names):
-            Adds employment effects to the simulation data.
-        combine_firm_indiv_effect(scenarios, name_indiv_elasticite, name_firm_elasticite, add_weights):
-            Combines firm and individual employment effects.
-        combine_firm_indiv_effects(scenarios, name_firm_elasticite, elasticite_names):
-            Combines firm and individual employment effects for all scenarios.
-        build_data_dads(year):
-            Builds the DADS data.
-        build_data_fare(year):
-            Builds the FARE data.
-        merge_data_simulation_dads_fare(year):
-            Merges the simulation, DADS, and FARE data.
-        build(year, scenarios, name_firm_elasticite, elasticite_names):
-            Builds the description dataset.
-        stat_des(year, list_var_groupby, list_var_of_interest, output_folder_path, export_filename):
-            Calculates descriptive statistics.
-        first_round_effects(data, variable, name_elasticite, scenarios):
-            Calculates first round effects.
     """
 
     # Initialisation
@@ -91,13 +58,9 @@ class DescriptionBuilder:
         Constructs all the necessary attributes for the DescriptionBuilder object.
 
         Args:
-        ----------
             project (str): The name of the CASD project
             log_filename (os.PathLike, optional): The path to the log file. Defaults to os.path.join(FILE_PATH.parents[2], 'logs/description.log').
 
-        Returns:
-        --------
-            None
         """
         # Initialisation du projet CASD
         self.project = project
@@ -110,15 +73,12 @@ class DescriptionBuilder:
         Extracts the names of scenarios.
 
         Args:
-        ----------
             scenarios (Union[str, List[str], dict]): The scenarios.
 
         Returns:
-        ----------
-            List[str]: The names of the scenarios.
+            (List[str]): The names of the scenarios.
 
         Raises:
-        ----------
             ValueError: If the type of scenarios is not 'dict', 'list' or 'str'.
         """
         # Extraction des noms des scenarios
@@ -146,13 +106,11 @@ class DescriptionBuilder:
         Builds the simulation data.
 
         Args:
-        ----------
             year (int): The year.
             scenarios (Union[str, List[str], dict]): The scenarios.
             taux_bascule_vm (Optional[Union[float, None]], optional): The rate of switching "versement mobilité" to another tax base. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Disjonction de cas suivant qu'un jeu de données est ou non fourni en argument
@@ -176,12 +134,10 @@ class DescriptionBuilder:
         Builds the simulation data from a DataFrame.
 
         Args:
-        ----------
             year (int): The year.
             scenarios (Union[str, List[str], dict]): The scenarios.
 
         Returns:
-        --------
             None
         """
         # Liste des variables de coût du travail
@@ -217,13 +173,11 @@ class DescriptionBuilder:
         Initializes the simulation data.
 
         Args:
-        ----------
             year (int): The year.
             scenarios (dict): The scenarios.
             taux_bascule_vm (Optional[Union[float, None]], optional): The rate of switching to VM. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Simulation des cotisations et allègements
@@ -268,11 +222,9 @@ class DescriptionBuilder:
         Adds labor costs variables to the simulation data.
 
         Args:
-        ----------
             scenarios (Union[str, List[str], dict]): The scenarios.
 
         Returns:
-        --------
             None
         """
         # Ajout du salaire brut
@@ -327,7 +279,6 @@ class DescriptionBuilder:
         Adds employment effect to the simulation data.
 
         Args:
-        ----------
             scenarios (Union[str, List[str], dict]): The scenarios.
             name_elasticite (str): The name of the elasticity.
             y0_elasticite (Optional[Union[float, None]], optional): The initial value of the elasticity. Defaults to None.
@@ -336,7 +287,6 @@ class DescriptionBuilder:
             type_elasticite (Optional[Union[str, None]], optional): The type of the elasticity. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Construction des élasticités
@@ -395,12 +345,10 @@ class DescriptionBuilder:
         Adds employment effects to the simulation data.
 
         Args:
-        ----------
             scenarios (Union[str, List[str], dict]): The scenarios.
             elasticites_names (Optional[Union[List[str], None]], optional): The names of the elasticities. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Initialisation de la slite des élasticités à parcourir
@@ -438,14 +386,12 @@ class DescriptionBuilder:
         Combines firm and individual employment effects.
 
         Args:
-        ----------
             scenarios (dict): The scenarios.
             name_indiv_elasticite (str): The name of the individual elasticity.
             name_firm_elasticite (str): The name of the firm elasticity.
             add_weights (bool): Whether to add weights.
 
         Returns:
-        --------
             None
         """
         # Parcours des scénarios
@@ -510,13 +456,11 @@ class DescriptionBuilder:
         Combines firm and individual employment effects for all scenarios.
 
         Args:
-        ----------
             scenarios (dict): The scenarios.
             name_firm_elasticite (str): The name of the firm elasticity.
             elasticite_names (Optional[Union[List[str], None]], optional): The names of the elasticities. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Initialisation de la liste des élasticités à parcourir
@@ -578,11 +522,9 @@ class DescriptionBuilder:
         Builds the DADS data.
 
         Args:
-        ----------
             year (int): The year.
 
         Returns:
-        --------
             None
         """
         # Filtre sur les lignes (sélection des postes principaux de l'année du millésime)
@@ -625,11 +567,9 @@ class DescriptionBuilder:
         Builds the FARE data.
 
         Args:
-        ----------
             year (int): The year.
 
         Returns:
-        --------
             None
         """
         # Filtre sur les unités légales
@@ -660,11 +600,9 @@ class DescriptionBuilder:
         Merges the simulation, DADS, and FARE data.
 
         Args:
-        ----------
             year (Optional[Union[int, None]], optional): The year. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Vérification que l'ensemble des jeux de données à apparier sont en attribut de la classe
@@ -724,14 +662,12 @@ class DescriptionBuilder:
         Builds the description dataset.
 
         Args:
-        ----------
             year (int): The year.
             scenarios (dict): The scenarios.
             name_firm_elasticite (str): The name of the firm elasticity.
             elasticite_names (Optional[Union[List[str], None]], optional): The names of the elasticities. Defaults to None.
 
         Returns:
-        --------
             None
         """
         # Construction des données de simulation
@@ -762,7 +698,6 @@ class DescriptionBuilder:
         Calculates descriptive statistics.
 
         Args:
-        ----------
             year (int): The year.
             list_var_groupby (List[str]): The variables to group by.
             list_var_of_interest (List[str]): The variables of interest.
@@ -770,7 +705,6 @@ class DescriptionBuilder:
             export_filename (str): The name of the export file.
 
         Returns:
-        --------
             None
         """
         # Initialisation de l'estimateur de statistiques descriptives
@@ -836,15 +770,13 @@ class DescriptionBuilder:
         Calculates first round effects.
 
         Args:
-        ----------
             data (pd.DataFrame): The data.
             variable (str): The variable.
             name_elasticite (str): The name of the elasticity.
             scenarios (Union[str, List[str], dict]): The scenarios.
 
         Returns:
-        ----------
-            pd.DataFrame: The first round effects.
+            (pd.DataFrame): The first round effects.
         """
         # Variables manquantes
         missing_variables = np.setdiff1d(

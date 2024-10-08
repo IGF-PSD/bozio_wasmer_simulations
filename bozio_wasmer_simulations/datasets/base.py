@@ -12,30 +12,12 @@ class Loader:
     """
     A class used to load data from 'csv', 'sas7bdat' and 'parquet' file formats.
 
-    Attributes:
-    ----------
-        None
-
-    Methods:
-    -------
-        _build_mask_from_filters(data, filters):
-            Builds a mask from filters for a given dataframe.
-        read_sas(path, columns, filters, **kwargs):
-            Loads data from a SAS file.
-        read_csv(path, columns, filters, **kwargs):
-            Loads data from a CSV file.
-        load(path, columns, filters, **kwargs):
-            Loads data from a file based on its extension.
     """
 
     # Initialisation
     def __init__(self) -> None:
         """
         Constructs all the necessary attributes for the Loader object.
-
-        Returns:
-        --------
-            None
         """
         pass
 
@@ -48,18 +30,15 @@ class Loader:
         Builds a mask from filters for a given dataframe.
 
         Args:
-        ----------
-            data : pd.DataFrame
+            data (pd.DataFrame):
                 The dataframe to build the mask for.
-            filters : Union[List[Tuple], List[List[Tuple]]]
+            filters (Union[List[Tuple], List[List[Tuple]]]):
                 The filters to apply. Each filter is a tuple of (column, operator, value).
                 If filters is a list of tuples, all filters are applied in conjunction.
                 If filters is a list of lists of tuples, each list is applied in disjunction.
 
         Returns:
-        -------
-            pd.DataFrame
-                The mask that can be used to filter the dataframe.
+            (pd.DataFrame): The mask that can be used to filter the dataframe.
         """
         # Si filters est une liste de tuples
         if all(isinstance(i, tuple) for i in filters) and isinstance(filters, list):
@@ -105,12 +84,11 @@ class Loader:
         Loads data from a SAS file.
 
         Args:
-        ----------
-            path : os.PathLike
+            path (os.PathLike):
                 The path to the SAS file.
-            columns : Optional[Union[None, List[str]]], optional
+            columns (Optional[Union[None, List[str]]], optional):
                 The columns to load. If None, all columns are loaded.
-            filters : Optional[Union[None, List[str], List[List[str]]]], optional
+            filters (Optional[Union[None, List[str], List[List[str]]]], optional):
                 The filters to apply. Each filter is a tuple of (column, operator, value).
                 If filters is a list of tuples, all filters are applied in conjunction.
                 If filters is a list of lists of tuples, each list is applied in disjunction.
@@ -118,9 +96,7 @@ class Loader:
                 Additional arguments to pass to the pyreadstat.read_sas7bdat function.
 
         Returns:
-        -------
-            pd.DataFrame
-                The loaded data.
+            (pd.DataFrame): The loaded data.
         """
         # Chargement des données
         data, _ = pyreadstat.read_sas7bdat(path, usecols=columns, **kwargs)
@@ -141,12 +117,11 @@ class Loader:
         Loads data from a CSV file.
 
         Args:
-        ----------
-            path : os.PathLike
+            path (os.PathLike):
                 The path to the CSV file.
-            columns : Optional[Union[None, List[str]]], optional
+            columns (Optional[Union[None, List[str]]], optional):
                 The columns to load. If None, all columns are loaded.
-            filters : Optional[Union[None, List[str], List[List[str]]]], optional
+            filters (Optional[Union[None, List[str], List[List[str]]]], optional):
                 The filters to apply. Each filter is a tuple of (column, operator, value).
                 If filters is a list of tuples, all filters are applied in conjunction.
                 If filters is a list of lists of tuples, each list is applied in disjunction.
@@ -154,9 +129,7 @@ class Loader:
                 Additional arguments to pass to the pd.read_csv function.
 
         Returns:
-        -------
-            pd.DataFrame
-                The loaded data.
+            (pd.DataFrame): The loaded data.
         """
         # Chargement des données
         data = pd.read_csv(path, usecols=columns, **kwargs)
@@ -177,12 +150,11 @@ class Loader:
         Loads data from a file based on its extension.
 
         Args:
-        ----------
-            path : os.PathLike
+            path (os.PathLike):
                 The path to the file.
-            columns : Optional[Union[None, List[str]]], optional
+            columns (Optional[Union[None, List[str]]], optional):
                 The columns to load. If None, all columns are loaded.
-            filters : Optional[Union[None, List[str], List[List[str]]]], optional
+            filters (Optional[Union[None, List[str], List[List[str]]]], optional):
                 The filters to apply. Each filter is a tuple of (column, operator, value).
                 If filters is a list of tuples, all filters are applied in conjunction.
                 If filters is a list of lists of tuples, each list is applied in disjunction.
@@ -190,14 +162,10 @@ class Loader:
                 Additional arguments to pass to the appropriate function.
 
         Returns:
-        -------
-            pd.DataFrame
-                The loaded data.
+            (pd.DataFrame): The loaded data.
 
         Raises:
-        ------
-            ValueError
-                If the file extension is not 'parquet', 'sas7bdat', or 'csv'.
+            ValueError: If the file extension is not 'parquet', 'sas7bdat', or 'csv'.
         """
         # Extraction de l'extension du fichier à charger
         extension = path.split(".")[-1]
