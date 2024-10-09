@@ -9,7 +9,7 @@ This package is built to quantify different outcomes of employer contributions :
 * Empirically :
   - To quantify budget costs (static and "first-round" after application of the employment effects) associated with each reform
   - To estimate employment effects of the reform
-* Theorically :
+* Theoretically :
   - To estimate incentives to increase wages
   - To estimate the impact of adding the "prime de partage de la valeur" to the basis for reducing contributions
 
@@ -32,10 +32,10 @@ The repository is organized as follow :
 ### Package and dependencies
 
 ```bash
-git clone <toolbox_repo_url>
+git clone https://github.com/IGF-PSD/igf_toolbox.git
 pip install -e igf_toolbox
 
-git clone <repo_url>
+git clone https://github.com/IGF-PSD/bozio_wasmer_simulations.git
 pip install -e bozio_wasmer_simulations
 ```
 
@@ -83,6 +83,10 @@ reform_params = {
 # Simulate a reform
 data_simul = simulator.simulate_reform(name='my_reform', reform_params=reform_params, year=2022, simulation_step_smic=0.1, simulation_max_smic=4)
 ``` 
+
+## Warnings :warning:
+
+Salary rates are not observed but are derived from data recorded in DSN ("Déclarations Sociales Nominatives"), from wages and amount of paid work hours. The quality of the latter is sometimes low, which can lead to some postprocessing.
 
 ## License
 
