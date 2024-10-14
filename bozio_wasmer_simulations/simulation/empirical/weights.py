@@ -11,7 +11,7 @@ FILE_PATH = Path(os.path.abspath(__file__))
 
 
 # Fonction construisant les pondération à partir des données ACOSS
-def add_weights_eqtp_accos(
+def add_weights_eqtp_acoss(
     data_dads: pd.DataFrame,
     year: int,
     var_eqtp: str,
@@ -55,32 +55,24 @@ def add_weights_eqtp_accos(
         np.floor(data_dads["salaire_brut_smic"] * 10) / 10
     )
     data_dads["tranche_salaire_brut_smic_1"] = np.floor(data_dads["salaire_brut_smic"])
-    # Combination des tranches de 10 % et de 1 % en dessous de 2 SMIC et de 1 au dessus de 10 SMIC
+    # Combinaison des tranches de 10 % et de 1 % entre 1 et 2 SMIC
     data_dads["tranche_salaire_brut_smic_100"] = np.where(
-        data_dads["salaire_brut_smic"] < 2,
+        (data_dads["salaire_brut_smic"] < 2) & (data_dads["salaire_brut_smic"] >= 1),
         data_dads["tranche_salaire_brut_smic_100"],
         data_dads["tranche_salaire_brut_smic_10"],
     )
-    data_dads["tranche_salaire_brut_smic_100"] = np.where(
-        data_dads["salaire_brut_smic"] > 10,
-        data_dads["tranche_salaire_brut_smic_1"],
-        data_dads["tranche_salaire_brut_smic_100"],
-    )
+
     # Suppression des tranches de 10 % et de 1
     data_dads.drop(
         ["tranche_salaire_brut_smic_10", "tranche_salaire_brut_smic_1"],
         axis=1,
         inplace=True,
     )
-    # Création des tranches entre 5 et 7.5 et entre 7,5 et 10
+    # Création d'une tranche unique au-dessus de 4
     data_dads.loc[
-        (data_dads["salaire_brut_smic"] >= 5) & (data_dads["salaire_brut_smic"] < 7.5),
+        (data_dads["salaire_brut_smic"] >= 4),
         "tranche_salaire_brut_smic_100",
-    ] = 5
-    data_dads.loc[
-        (data_dads["salaire_brut_smic"] >= 7.5) & (data_dads["salaire_brut_smic"] < 10),
-        "tranche_salaire_brut_smic_10",
-    ] = 7.5
+    ] = 4
 
     # Ajout des poids
     # Calcul des poids actuels

@@ -20,7 +20,7 @@ from bozio_wasmer_simulations.simulation.empirical.preprocessing import (
     preprocess_dads_openfisca_ag, preprocess_simulated_variables)
 from bozio_wasmer_simulations.simulation.empirical.reform import \
     create_and_apply_structural_reform_ag
-from bozio_wasmer_simulations.simulation.empirical.weights import add_weights_eqtp_accos
+from bozio_wasmer_simulations.simulation.empirical.weights import add_weights_eqtp_acoss
 # Importation de modules ad hoc
 from bozio_wasmer_simulations.utils.utils import _init_logger
 from tqdm import tqdm
@@ -433,7 +433,7 @@ class CoreSimulation(EmpiricalSimulator):
             ["salaire_de_base", "remuneration_apprenti"]
         ].sum(axis=1)
         # Ajout des poids
-        self.data_dads = add_weights_eqtp_accos(
+        self.data_dads = add_weights_eqtp_acoss(
             data_dads=self.data_dads,
             year=year_simul,
             var_eqtp="eqtp",
