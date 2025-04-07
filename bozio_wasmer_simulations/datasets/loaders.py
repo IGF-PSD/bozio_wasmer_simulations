@@ -104,6 +104,29 @@ def load_dads(
             join="outer",
             ignore_index=True,
         )
+    elif year == 2023:
+        # En 2023, le format de la variable année change 
+        filters_2023 = [('annee', '==', year), ('pps', '==', '1')]
+        # Variables à conserver lors de l'import
+        columns = [e.lower() for e in columns]
+        # Chemin
+        table_path = f"\\\casd.fr\\casdfs\\Projets\\{project}\\Data\\DADS_DADS Postes_{year}"
+        # Enumération des fichiers
+        list_files = os.listdir(table_path)
+
+        # Restriction aux fichiers parquet relatifs à l'année 2023
+        data_dads = pd.concat(
+            (
+                loader.load(
+                    path=f"{table_path}\\{file}", columns=columns, filters=filters_2023
+                )
+                for file in list_files
+                if ((file.endswith(".parquet")) & (str(year) in file))
+            ),
+            axis=0,
+            join="outer",
+            ignore_index=True,
+        )
     else:
         raise ValueError(f"Data not available for year : {year}")
         # data_dads = pd.read_parquet(table_path, columns=columns, filters=filters)
